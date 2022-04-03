@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Login Register</title>
+ <%- include('head') %>
+
+</head>
+<body>
+  <%- include('header') %>
+
+ <div class="container">
+  <div class="page-header text-center">
+   <h1>My Profile</h1>
+   <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+  </div>
+
+ 
+
+  <div class="row">
+   <div class="col-sm-12">
+    <div class="well">
+     <h3><span class="fa fa-user"></span> Welcome <%= user.username %></h3>
+
+   
+
+     <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">My Wallet</h5>
+            <form action="/amount" method="post" class="card-body">
+              <div class="form-group">
+               <label>Amount</label>
+               <input type="number" class="form-control" min="0" required max="<%= 500-user.amount %>" placeholder="Add Money upto Rs.<%= 500-user.amount %> " name="amount" value="">
+              </div>
+              <input type="hidden" name="id" value="<%= user.id %>">
+            <br>
+              <button type="submit" class="btn btn-success" 
+              <% if((500-user.amount)==0){ %>
+                disabled
+             <% } %>
+            
+              >Add Amount</button>
+             </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Balance Amount</h5>
+            <p>
+              <strong>id</strong> #<%= user.id %> <br>
+              <strong>Name</strong> <%= user.username %> <br>
+             </p>
+            <p class="card-text"> <h3 class="text-success"> <span class="text-dark"><b>Rs.</b></span> <%= user.amount %></h3></p>
+           <button class="btn btn-primary"  <% if(user.amount==0){ %>
+            disabled
+         <% } %>> <a href="/withdraw/<%= user.id %>"   
+             
+           class="text-white">Withdraw Amount</a> </button> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+    </div>
+   </div>
+  </div>
+ </div>
+</body>
+</html>
